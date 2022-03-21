@@ -1,0 +1,11 @@
+SELECT ord.* " acc.locales[0].name.firstName AS localesFirstName,"
+ " acc.locales[0].name.lastName AS localesLastName,"
+ " acc.name.firstName, acc.name.lastName,"
+ " FIRST phone.`number` FOR phone IN acc.phones WHEN phone.type='OTHER' END AS otherNumber,"
+ " FIRST phone.`number` FOR phone IN acc.phones WHEN phone.type='MOBILE' END AS mobileNumber"
+ " FROM `" + bucket.name() + "` AS ord USE KEYS $tempOrderIds"
+ " JOIN `" + bucket.name() + "` AS acc ON KEYS ord.customerAccountId"
+ " WHERE acc.classId= '"+ ACCOUNT_DOC_ID
+
+
+
